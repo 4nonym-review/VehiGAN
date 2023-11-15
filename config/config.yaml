@@ -1,0 +1,108 @@
+features: ['speed_x', 'del_pos_x', 'speed_y', 'del_pos_y', 
+            'accel_x', 'del_speed_x', 'accel_y', 'del_speed_y', 
+            'del_heading_x', 'yaw_rate_x', 'del_heading_y', 'yaw_rate_y']
+labels: ['id', 'time_chunk', 'attack_gt', 'attack_type', 'attack_index', 'attack_name']
+
+results_only: False
+version: today 
+retrain : True
+verbose : False
+
+window: 0 #dummy
+batch_size: 256
+
+learning_rate_ae: 0.0002
+learning_rate_wgan: 0.0002
+
+list_of_windows: [8]
+
+loss:
+  ae: 'mse'
+  wgan: 'none'
+
+defaults:
+  - dataset: training
+  - models: wgan
+
+
+workspace_dir: 'none'
+models_dir: ../artifacts/models
+scaler_dir: ../artifacts/scaler
+results_dir: ../artifacts/results
+
+
+selected_attacks : [
+  'No Attack',
+  # // Position attacks 
+  'RandomPosition',
+  'RandomPositionOffset',
+  'PlaygroundConstantPosition',
+  'ConstantPositionOffset',
+
+  # // Speed attacks
+  'RandomSpeed',
+  'RandomSpeedOffset',
+  'ConstantSpeed',
+  'ConstantSpeedOffset',
+  'HighSpeed',
+  'LowSpeed',
+
+  # // Acceleration attacks
+
+  'RandomAcceleration',
+  'RandomAccelerationOffset',
+  'ConstantAcceleration',
+  'ConstantAccelerationOffset',
+  'HighAcceleration',
+  'LowAcceleration',
+
+  # // Heading attacks
+  'RandomHeading',
+  'RandomHeadingOffset',
+  'ConstantHeading',
+  'ConstantHeadingOffset',
+  'OppositeHeading',
+  'PerpendicularHeading',
+  'RotatingHeading',
+
+  # // Yaw-rate attacks
+  'RandomYawRate',
+  'RandomYawRateOffset',
+  'ConstantYawRate',
+  'ConstantYawRateOffset',
+  'HighYawRate',
+  'LowYawRate',
+
+  # // Heading and Yaw-rate matching attacks
+  'RandomHeadingYawRate',
+  'RandomHeadingYawRateOffset',
+  'ConstantHeadingYawRate',
+  'ConstantHeadingYawRateOffset',
+  'HighHeadingYawRate',
+  'LowHeadingYawRate',
+]
+
+
+# Configuration for data curation ........................
+time_feat : 'msg_generation_time'
+vehicle_type : 'rv'
+label : 'attack_gt'
+file_attr : ['msg_generation_time', 'attack_gt', 'attack_type', 'attack_index', 'attack_name']
+
+vehicle_feats : ['id', 'pos_x', 'pos_y', 'pos_z', 'speed', 'accel', 'heading', 'yaw_rate', 'length', 'width', 'height']
+mutual_feats : ['rv_hv_distance', 'rssi', 'wsm_data', 'attack_gt', 'attack_type']
+vectors : ['speed', 'accel', 'heading', 'yaw_rate']
+vis_feat : ['speed_x', 'del_pos_x', 'speed_y', 'del_pos_y', 
+            'accel_x', 'del_speed_x', 'accel_y', 'del_speed_y', 
+            'del_heading_x', 'yaw_rate_x', 'del_heading_y', 'yaw_rate_y']
+
+feat_not_for_scaling : [
+            "id",
+            "msg_generation_time",
+            "attack_gt",
+            "attack_type",
+            "attack_index",
+            "attack_name",
+            "time_chunk",
+        ]
+

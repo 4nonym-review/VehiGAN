@@ -1,0 +1,18 @@
+model_type: baselines
+
+model_List :
+  - 'PCA'
+  - 'MCD'
+  - 'KNN'
+  - 'LOF'
+  - 'IForest'
+  - 'GMM'
+  - 'ECOD'
+  - 'DeepSVDD'
+
+n_components : 6
+num_jobs : 8
+random_state : 1 
+contamination : 0.01
+use_ae : False
+epochs : 25
